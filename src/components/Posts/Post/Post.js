@@ -16,6 +16,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import moment from 'moment';
+import {Switch, Route, Link, useRouteMatch} from 'react-router-dom';
+
+import PostHome from '../../PostHome/PostHome';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,18 +53,28 @@ const Post = (props) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log("IMAGE DATA====" + JSON.stringify(props.files[0].fileData));
+
+  let { path, url } = useRouteMatch();
+
+  // let route = (
+    
+  //     <Route exact path={`/posts/:postId`} component={PostHome} />
+       
+
+  // )
+  
   return (
+    <div>
     <Card className={classes.root}>
       <CardHeader
         title={props.title}
-        subheader="September 14, 2016"
+        subheader={moment(props.createdAt).fromNow()}
       />
-      <img
+     <Link to={`/posts/${props.postId}`}><img
         src={`data:image/jpeg;base64,${props.files[0].fileData}`}
-        height="300px"
+        height="200px"
         width="300px"
-      />
+      /></Link>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
@@ -71,7 +85,10 @@ const Post = (props) => {
         
       </CardActions>
     </Card>
+    
+    </div>
   );
 }
+
 
 export default Post;

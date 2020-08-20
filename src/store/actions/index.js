@@ -1,4 +1,5 @@
 export {
     fetchData,
-    addData
+    addData,
+    fetchDataById
 } from './data';

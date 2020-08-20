@@ -1,14 +1,18 @@
-export const ADD_DATA = 'ADD_DATA';
+
 export const ADD_DATA_START = 'ADD_DATA_START';
 export const ADD_DATA_SUCCESS = 'ADD_DATA_SUCCESS';
 export const ADD_DATA_FAIL = 'ADD_DATA_FAIL';
 
-export const ADD_PHOTO = 'ADD_PHOTO';
 export const ADD_PHOTO_START = 'ADD_PHOTO_START';
 export const ADD_PHOTO_SUCCESS = 'ADD_PHOTO_SUCCESS';
 export const ADD_PHOTO_FAIL = 'ADD_PHOTO_FAIL';
 
-export const FETCH_DATA = 'FETCH_DATA';
 export const FETCH_DATA_START = 'FETCH_DATA_START';
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const FETCH_DATA_FAIL = 'FETCH_DATA_FAIL';
+
+export const FETCH_DATA_BY_ID_SUCCESS = 'FETCH_DATA_BY_ID_SUCCESS';
+export const FETCH_DATA_BY_ID_START = 'FETCH_DATA_BY_ID_START';
+export const FETCH_DATA_BY_ID_FAIL = 'FETCH_DATA_BY_ID_FAIL';
+
+

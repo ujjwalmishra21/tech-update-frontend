@@ -14,9 +14,9 @@ class Posts extends Component{
         if(this.props.data && this.props.data.length > 0){
             
             for(let data of this.props.data){
-                console.log("Data" + JSON.stringify(data)) 
-                let html = <Post title={data.title} content={data.title} files={data.files} createdAt={data.createdAt}/>;   
-                post_html.push(html);
+                
+                let html = <Post key={data.id} postId={data.id} title={data.title} content={data.title} files={data.files} createdAt={data.createdAt}/>;   
+                post_html.unshift(html);
             }
             
         }

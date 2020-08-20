@@ -3,6 +3,7 @@ import { updateObject } from '../../utility/utility';
 
 const initialState = {
     data: null,
+    postData: null,
     loading: false,
     error: null
 };
@@ -47,6 +48,26 @@ const fetchDataFail = (state, action) => {
     };
 };
 
+const fetchDataByIdStart = (state, action) => {
+    return updateObject(state, {
+        loading: true
+    });
+};
+
+const fetchDataByIdSuccess = (state, action) => {
+    return{
+        loading: false,
+        postData: action.postData
+    };
+};
+
+const fetchDataByIdFail = (state, action) => {
+    return {
+        loading: false,
+        error: action.error
+    };
+};
+
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case actionTypes.ADD_DATA_START:
@@ -61,6 +82,12 @@ const reducer = (state = initialState, action) => {
             return fetchDataSuccess(state, action);
         case actionTypes.FETCH_DATA_FAIL:
             return fetchDataFail(state, action);
+        case actionTypes.FETCH_DATA_BY_ID_SUCCESS:
+            return fetchDataByIdSuccess(state, action);
+        case actionTypes.FETCH_DATA_BY_ID_START:
+            return fetchDataByIdStart(state, action);
+        case actionTypes.FETCH_DATA_BY_ID_FAIL:
+            return fetchDataByIdFail(state, action);        
         default:
             return state;
     };
