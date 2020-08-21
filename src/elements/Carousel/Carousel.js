@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
     transform: 'translateZ(0)',
     height:405,
     overflowY:'hidden',
-    "&:first-child":{
-        
-    },
+    '&::-webkit-scrollbar' :{
+        display:'none'
+    }
   },
   title: {
     color: theme.palette.primary.light,

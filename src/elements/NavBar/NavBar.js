@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor:'black !important',
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -140,7 +141,6 @@ const NavBar = () => {
         <List>
           {links.map((link, index) => (
             <Link to={link.path} className={classes.links}><ListItem button key={link.text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={link.text} />
             </ListItem></Link>
           ))}
