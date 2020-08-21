@@ -98,10 +98,12 @@ export const fetchDataByIdSuccess = (postData) => {
 export const fetchDataById = (id) => {
     return dispatch => {
         dispatch(fetchDataByIdStart());
+        
         axios.get(`/data/${id}`)
             .then(response => {
+                console.log("HERE" + JSON.stringify(response.data));
                 if(response.status === 200){
-                    dispatch(fetchDataSuccess(response.data));
+                    dispatch(fetchDataByIdSuccess(response.data));
                 }else{
                     dispatch(fetchDataByIdFail('Request failed'))
                 }

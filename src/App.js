@@ -3,6 +3,7 @@ import { Route, Switch, Redirect, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
+import NavBar from '../src/elements/NavBar/NavBar';
 
 const asyncPosts = asyncComponent(() => {
   return import ('./components/Posts/Posts');
@@ -26,6 +27,7 @@ class App extends Component {
     );
     return (
       <div className="App">
+        <NavBar/>
         <header className="App-header">
         
          {route}
