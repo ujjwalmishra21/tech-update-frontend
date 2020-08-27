@@ -58,11 +58,13 @@ export const fetchDataStart = () => {
     };
 };
 
-export const fetchData = () => {
+export const fetchData = (token) => {
     return dispatch => {
         dispatch(fetchDataStart());
+        
+        const config = {headers:{'Authorization': token}};
 
-        axios.get('/data')
+        axios.get('/data', config)
             .then(response => {
                 if(response.status === 200){
                     dispatch(fetchDataSuccess(response.data));
@@ -95,13 +97,15 @@ export const fetchDataByIdSuccess = (postData) => {
     };
 };
 
-export const fetchDataById = (id) => {
+export const fetchDataById = (token, id) => {
     return dispatch => {
         dispatch(fetchDataByIdStart());
         
-        axios.get(`/data/${id}`)
+        const config = {headers:{'Authorization': token}};
+
+        axios.get(`/data/${id}`,config)
             .then(response => {
-                console.log("HERE" + JSON.stringify(response.data));
+               
                 if(response.status === 200){
                     dispatch(fetchDataByIdSuccess(response.data));
                 }else{

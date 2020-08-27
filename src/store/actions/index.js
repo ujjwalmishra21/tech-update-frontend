@@ -3,3 +3,8 @@ export {
     addData,
     fetchDataById
 } from './data';
+
+export {
+    signup,
+    authInit
+} from './auth'
