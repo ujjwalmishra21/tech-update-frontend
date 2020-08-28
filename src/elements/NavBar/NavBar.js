@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = () => {
+const NavBar = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -96,9 +96,9 @@ const NavBar = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const links = [
-      {text:'Home', path:'/'}
-  ];
+  // const links = [
+  //     {text:'Home', path:'/'}
+  // ];
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -139,14 +139,18 @@ const NavBar = () => {
         </div>
         <Divider />
         <List>
-          {links.map((link, index) => (
-            <Link to={link.path} className={classes.links}><ListItem button key={link.text}>
-              <ListItemText primary={link.text} />
-            </ListItem></Link>
+          {props.paths.map((link, index) => (
+            <div  key={index}>
+              <Link to={link.path} className={classes.links}>
+                <ListItem button key={link.text}>
+                  <ListItemText primary={link.text} />
+                </ListItem>
+              </Link>
+              <Divider />
+            </div>
           ))}
         </List>
-        <Divider />
-      
+            
       </Drawer>
       <main
         className={clsx(classes.content, {

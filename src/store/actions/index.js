@@ -6,5 +6,7 @@ export {
 
 export {
     signup,
-    authInit
-} from './auth'
+    authInit,
+    authCheckState,
+    logout
+} from './auth';
