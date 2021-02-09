@@ -7,7 +7,7 @@ import * as actions from '../../store/actions/index';
 
 class Posts extends Component{
     componentDidMount(){
-        this.props.fetchData();
+        this.props.fetchData(this.props.token);
     }
     render(){
         let post_html = [];
@@ -34,13 +34,14 @@ const mapStateToProps = state => {
     return {
         loading: state.data.loading,
         data: state.data.data,
-        error: state.data.error
+        error: state.data.error,
+        token: state.auth.token
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchData: () => dispatch(actions.fetchData())
+        fetchData: (token) => dispatch(actions.fetchData(token))
     };
 };
 

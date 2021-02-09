@@ -27,7 +27,9 @@ const asyncSignup = asyncComponent(() => {
 });
 
 class App extends Component {
- 
+  componentDidMount(){
+    this.props.onTryAutoLogin();
+  }
   render(){
     let route = (
       <Switch>

@@ -61,6 +61,7 @@ class Signup extends Component{
                     for(let field in this.state.form){
                         data[field] = this.state.form[field].value;
                     }
+                    data['roleIds'] = [2];
                     this.props.submitSignup(data);
                 }else{
                     alert('Passwords do not match');

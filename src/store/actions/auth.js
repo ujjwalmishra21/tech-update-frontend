@@ -62,12 +62,14 @@ export const authInit = (data) => {
         dispatch(authInitStart());
         axios.post('/login', data)
             .then(response => {
-                if(response.status === 200){
+                if(response.status === 200 && response.data){
+
                     const param = {
-                        'Authorization': response.headers['Authorization']
+                        'token': response.data['token']
                     };
-                    localStorage.setItem('Authorization', param['Authorization']);
-                    dispatch(authInitSuccess(param['Authorization']));
+                   
+                    localStorage.setItem('token', param['token']);
+                    dispatch(authInitSuccess(param['token']));
 
                 }else{
                     dispatch(authInitFail('Request failed'));
@@ -95,7 +97,7 @@ export const logout = () => {
 
 export const authCheckState = () => {
     return dispatch => {
-        const token = localStorage.getItem('Authorization');
+        const token = localStorage.getItem('token');
         if(!token){
             dispatch(logout);
         }else{

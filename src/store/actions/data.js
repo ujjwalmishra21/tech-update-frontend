@@ -63,7 +63,7 @@ export const fetchData = (token) => {
         dispatch(fetchDataStart());
         
         const config = {headers:{'Authorization': token}};
-
+        
         axios.get('/data', config)
             .then(response => {
                 if(response.status === 200){

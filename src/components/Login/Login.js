@@ -6,6 +6,7 @@ import './Login.css';
 import * as actions from '../../store/actions/index';
 import { updateObject, checkValidity } from '../../utility/utility';
 import { Button, TextField } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component{
     state = {
@@ -83,7 +84,7 @@ class Login extends Component{
                 properties : this.state.form[key]
             });
         }
-        
+      
         let form = (
             <form>
                 {formElementArr.map(element => {
@@ -107,13 +108,27 @@ class Login extends Component{
                 
             </form>
         );
-
+        
+        let redirect = null;
+        
+        if(this.props.isAuthenticated){
+            redirect = <Redirect to="/" />
+        }
         return (
             <React.Fragment>
+                {redirect}
                 {form}
             </React.Fragment>
         );
     }
+}
+
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null
+    };
 }
 
 const mapDispatchToProps = dispatch => {
@@ -122,4 +137,4 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
