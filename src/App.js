@@ -18,6 +18,10 @@ const asyncPostHome = asyncComponent(() => {
   return import ('./components/PostHome/PostHome');
 });
 
+const asyncLogout = asyncComponent(() => {
+  return import ('./components/Logout/Logout');
+});
+
 const asyncLogin = asyncComponent(() => {
   return import ('./components/Login/Login');
 });
@@ -48,11 +52,13 @@ class App extends Component {
       route = (
         <Switch>
           <Route exact path="/posts/:postId" component={asyncPostHome} />
+          <Route exact path="/logout" component={asyncLogout} />
           <Route exact path="/" component={asyncPosts}/>
         </Switch>
       );
       paths = [
-        {text:'Home', path:'/'}
+        {text:'Home', path:'/'},
+        {text:'Logout', path:'/logout'}
       ];
     }
     return (

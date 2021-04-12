@@ -93,7 +93,8 @@ export const setAuthRedirectionPath = (path) => {
 };
 
 export const logout = () => {
-    localStorage.removeItem('Authorization');
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
     return {
         type: actionTypes.AUTH_LOGOUT
     };
