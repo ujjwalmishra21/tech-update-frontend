@@ -116,3 +116,43 @@ export const fetchDataById = (token, id) => {
             });
     };
 };
+
+export const likePostStart = () => {
+    return {
+        type: actionTypes.LIKE_POST_START
+    };
+};
+
+export const likePostSuccess = (data) => {
+    return {
+        type: actionTypes.LIKE_POST_SUCCESS,
+        data: data
+    };
+};
+
+export const likePostFail = (error) => {
+    return {
+        type: actionTypes.LIKE_POST_FAIL,
+        error: error
+    };
+};
+
+export const likePost = (token, id) => {
+    return dispatch => {
+        dispatch(likePostStart());
+
+        const config = {headers:{'Authorization': token}};
+
+        axios.post('/data/like',{ id: id }, config)
+            .then(response => {
+                if(response.status === 200){
+                    dispatch(likePostSuccess(response.data))
+                }else{
+                    dispatch(likePostFail('Request failed'));   
+                }
+            }).catch(error => {
+                dispatch(likePostFail(error));
+            });
+     
+    };
+};

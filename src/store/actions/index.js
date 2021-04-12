@@ -1,7 +1,8 @@
 export {
     fetchData,
     addData,
-    fetchDataById
+    fetchDataById,
+    likePost
 } from './data';
 
 export {

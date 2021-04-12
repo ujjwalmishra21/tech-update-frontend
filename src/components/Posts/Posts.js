@@ -15,7 +15,7 @@ class Posts extends Component{
             
             for(let data of this.props.data){
                 
-                let html = <Post key={data.id} postId={data.id} title={data.title} content={data.title} files={data.files} createdAt={data.createdAt}/>;   
+                let html = <Post key={data.id} postId={data.id} title={data.title} content={data.title} files={data.files} createdAt={data.createdAt} likes={data.likes} />;   
                 post_html.unshift(html);
             }
             
@@ -35,7 +35,7 @@ const mapStateToProps = state => {
         loading: state.data.loading,
         data: state.data.data,
         error: state.data.error,
-        token: state.auth.token
+        token: state.auth.token,
     };
 };
 

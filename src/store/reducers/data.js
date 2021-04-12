@@ -62,11 +62,31 @@ const fetchDataByIdSuccess = (state, action) => {
 };
 
 const fetchDataByIdFail = (state, action) => {
-    return {
+    return updateObject(state, {
         loading: false,
         error: action.error
+    });
+};
+
+const likePostStart = (state, action) => {
+    return updateObject(state, {
+        loading: true
+    });
+};
+
+const likePostSuccess = (state, action) => {
+    return updateObject(state, {
+        loading: false,
+    });
+};
+
+
+const likePostFail = (state, action) => {
+    return {
+        loading: false
     };
 };
+
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
@@ -87,7 +107,13 @@ const reducer = (state = initialState, action) => {
         case actionTypes.FETCH_DATA_BY_ID_START:
             return fetchDataByIdStart(state, action);
         case actionTypes.FETCH_DATA_BY_ID_FAIL:
-            return fetchDataByIdFail(state, action);        
+            return fetchDataByIdFail(state, action); 
+        case actionTypes.LIKE_POST_START:
+            return likePostStart(state, action);
+        case actionTypes.LIKE_POST_SUCCESS:
+            return likePostSuccess(state, action);
+        case actionTypes.LIKE_POST_FAIL:
+            return likePostFail(state, action)       
         default:
             return state;
     };

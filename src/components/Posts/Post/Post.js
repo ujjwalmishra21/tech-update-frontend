@@ -13,13 +13,16 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import moment from 'moment';
 import {Switch, Route, Link, useRouteMatch} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import PostHome from '../../PostHome/PostHome';
+import * as actions from '../../../store/actions/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,7 +65,18 @@ const Post = (props) => {
        
 
   // )
-  
+  var isLike = false;
+
+  if(props.likes.length > 0){
+    props.likes.forEach(like => {
+      if(like.username === props.username){
+        isLike = true;
+      }
+
+    })
+  }
+
+
   return (
     <div>
     <Card className={classes.root}>
@@ -76,8 +90,8 @@ const Post = (props) => {
         width="300px"
       /></Link>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton aria-label="add to favorites" onClick={()=>{props.likeUnlikePost(props.token, props.postId)}}>
+         { !isLike ? <FavoriteBorderIcon/> :<FavoriteIcon /> }
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
@@ -90,5 +104,16 @@ const Post = (props) => {
   );
 }
 
+const mapStateToProps = state => {
+  return {
+    username: state.auth.username,
+    token: state.auth.token
+  }
+}
 
-export default Post;
+const mapDispatchToProps = dispatch => {
+  return {
+    likeUnlikePost: (token, id) => dispatch(actions.likePost(token, id))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

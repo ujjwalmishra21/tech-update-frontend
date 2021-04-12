@@ -1,3 +1,4 @@
+import { ContactSupportOutlined } from '@material-ui/icons';
 import axios from '../../axios-order';
 import * as actionTypes from './actionTypes';
 
@@ -43,10 +44,11 @@ export const authInitStart = () => {
     };
 };
 
-export const authInitSuccess = (token) => {
+export const authInitSuccess = (data) => {
     return {
         type: actionTypes.AUTH_INIT_SUCCESS,
-        token: token
+        token: data['token'],
+        username: data['username']
     };
 };
 
@@ -65,11 +67,13 @@ export const authInit = (data) => {
                 if(response.status === 200 && response.data){
 
                     const param = {
-                        'token': response.data['token']
+                        'token': response.data['token'],
+                        'username': response.data['username']
                     };
                    
                     localStorage.setItem('token', param['token']);
-                    dispatch(authInitSuccess(param['token']));
+                    localStorage.setItem('username', param['username']);
+                    dispatch(authInitSuccess(param));
 
                 }else{
                     dispatch(authInitFail('Request failed'));
@@ -98,10 +102,16 @@ export const logout = () => {
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
-        if(!token){
+        const username = localStorage.getItem('username');
+        const data = {
+            token: token,
+            username: username
+        }
+        
+        if(!data['token']){
             dispatch(logout);
         }else{
-            dispatch(authInitSuccess(token));
+            dispatch(authInitSuccess(data));
         }
     };
 };
