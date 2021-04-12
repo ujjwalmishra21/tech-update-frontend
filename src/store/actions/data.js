@@ -146,7 +146,8 @@ export const likePost = (token, id) => {
         axios.post('/data/like',{ id: id }, config)
             .then(response => {
                 if(response.status === 200){
-                    dispatch(likePostSuccess(response.data))
+                    dispatch(likePostSuccess(response.data));
+                    dispatch(fetchData(token));
                 }else{
                     dispatch(likePostFail('Request failed'));   
                 }
