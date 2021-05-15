@@ -18,8 +18,10 @@ import * as actions from '../../../store/actions/index';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-    marginRight: 15,
-    marginBottom: 15,
+    marginRight: 25,
+    marginBottom: 25,
+    boxShadow: '1px 1px 0.5em',
+
   },
   media: {
     height: 0,
@@ -43,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 const Post = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  // const [liked, setLiked] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -50,18 +53,18 @@ const Post = (props) => {
 
   let { path, url } = useRouteMatch();
 
-  // let route = (
-    
-  //     <Route exact path={`/posts/:postId`} component={PostHome} />
-       
-
-  // )
+  // const handleLikeClick = () => {
+  //   props.likeUnlikePost(props.token, props.postId);
+  //   setLiked(!liked);
+  // }
+  
   var isLike = false;
 
   if(props.likes.length > 0){
     props.likes.forEach(like => {
       if(like.username === props.username){
         isLike = true;
+        
       }
 
     })
@@ -80,7 +83,7 @@ const Post = (props) => {
       /></Link>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites" onClick={()=>{props.likeUnlikePost(props.token, props.postId)}}>
-         { !isLike ? <FavoriteBorderIcon/> :<FavoriteIcon /> }
+         { !isLike ? <FavoriteBorderIcon /> :<FavoriteIcon  color="secondary"/> }
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
