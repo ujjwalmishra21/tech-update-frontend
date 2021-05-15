@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     transform: 'translateZ(0)',
     height:405,
+    margin: 'revert !important',
     overflowY:'hidden',
     '&::-webkit-scrollbar' :{
         display:'none'
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Carousel = (props) => {
   const classes = useStyles();
-    console.log("ELEMENT---------------" + props.files[0].fileName);
+    
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={1.8}>

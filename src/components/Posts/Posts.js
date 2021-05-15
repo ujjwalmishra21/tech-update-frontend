@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import './Posts.css';
 import Post from './Post/Post';
+import Loader from  '../../elements/Loader/Loader';
 import * as actions from '../../store/actions/index';
 
 class Posts extends Component{
@@ -11,14 +12,18 @@ class Posts extends Component{
     }
     render(){
         let post_html = [];
-        if(this.props.data && this.props.data.length > 0){
-            
-            for(let data of this.props.data){
+        if(!this.props.loading){
+            if(this.props.data && this.props.data.length > 0){
                 
-                let html = <Post key={data.id} postId={data.id} title={data.title} content={data.title} files={data.files} createdAt={data.createdAt} likes={data.likes} />;   
-                post_html.unshift(html);
+                for(let data of this.props.data){
+                    
+                    let html = <Post key={data.id} postId={data.id} title={data.title} content={data.title} files={data.files} createdAt={data.createdAt} likes={data.likes} />;   
+                    post_html.unshift(html);
+                }
             }
             
+        }else{
+            post_html = <Loader/>;
         }
 
         return(

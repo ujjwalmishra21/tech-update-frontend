@@ -3,31 +3,31 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './PostHome.css';
 import * as actions from '../../store/actions/index';
-import Carousel from '../../elements/Carousel/Carousel';
+import Loader from '../../elements/Loader/Loader';
+import ImageSlider from '../ImagesSlider/ImagesSlider';
+import Content from '../Content/Content';
 
 class PostHome extends Component{
 
     componentDidMount(){
         const id = this.props.match.params.postId;
-        console.log("ID--" + id);
+        
         this.props.fetchDataById(this.props.token, id);
     }
 
     render(){
         let html = null
-        if(this.props.data){
-            console.log("DATA---" + JSON.stringify(this.props.data));
+        if(!this.props.loading && this.props.data){
+            
             html = (
                 <div>
                     <div className="post-title-section">{this.props.data.title}</div>
-                    <Carousel files={this.props.data.files} />
-                    <div className="post-content-section-outer">
-                        <div className="post-content-section-inner">
-                            {this.props.data.content}
-                        </div>
-                    </div>
+                    <ImageSlider files={this.props.data.files} className="imageslider"/>
+                    <Content content={this.props.data.content} />
                 </div>
             )
+        }else{
+            html = <Loader/>
         }
         return (
             <div>

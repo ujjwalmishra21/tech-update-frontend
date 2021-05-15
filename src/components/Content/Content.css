@@ -1,0 +1,18 @@
+.post-content-section-outer{
+    margin-top: 35px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+}
+.post-content-section-inner-mid{
+    text-align: justify;
+    font-size: 17px;
+    font-family: emoji !important;
+
+}
+.post-content-section-inner-left{
+    width: 20%;
+}
+.post-content-section-inner-right{
+    width: 20%;
+}
