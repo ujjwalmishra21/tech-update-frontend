@@ -119,7 +119,7 @@ export const fetchDataById = (token, id) => {
 
 export const likePostStart = () => {
     return {
-        type: actionTypes.LIKE_POST_START
+        type: actionTypes.LIKE_POST_START,
     };
 };
 
@@ -147,7 +147,6 @@ export const likePost = (token, id) => {
             .then(response => {
                 if(response.status === 200){
                     dispatch(likePostSuccess(response.data));
-                    dispatch(fetchData(token));
                 }else{
                     dispatch(likePostFail('Request failed'));   
                 }

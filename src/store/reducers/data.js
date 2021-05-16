@@ -4,8 +4,10 @@ import { updateObject } from '../../utility/utility';
 const initialState = {
     data: null,
     postData: null,
+    temp: null,
     loading: false,
-    error: null
+    error: null,
+    status: 0
 };
 
 const addDataStart = (state, action) => {
@@ -70,20 +72,21 @@ const fetchDataByIdFail = (state, action) => {
 
 const likePostStart = (state, action) => {
     return updateObject(state, {
-        loading: true
+        // loading: true
     });
 };
 
 const likePostSuccess = (state, action) => {
     return updateObject(state, {
-        loading: false,
+        // loading: false,
+        temp: action.data
     });
 };
 
 
 const likePostFail = (state, action) => {
     return {
-        loading: false
+        // loading: false,
     };
 };
 

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -44,31 +44,28 @@ const useStyles = makeStyles((theme) => ({
 
 const Post = (props) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-  // const [liked, setLiked] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-  let { path, url } = useRouteMatch();
-
-  // const handleLikeClick = () => {
-  //   props.likeUnlikePost(props.token, props.postId);
-  //   setLiked(!liked);
-  // }
-  
-  var isLike = false;
-
+  let isLiked = false;
   if(props.likes.length > 0){
     props.likes.forEach(like => {
       if(like.username === props.username){
-        isLike = true;
-        
+        isLiked = true;
       }
-
     })
   }
+
+  const [liked, setLiked] = useState(isLiked);
+
+  const handleLikeClick = () => {
+    props.likeUnlikePost(props.token, props.postId);
+  }
+
+  useEffect(() => {
+    if(props.temp && props.temp.id === props.postId){
+      setLiked(!liked)
+    }
+  }, [props.temp])
+
  return (
     <div>
     <Card className={classes.root}>
@@ -82,8 +79,8 @@ const Post = (props) => {
         width="300px"
       /></Link>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={()=>{props.likeUnlikePost(props.token, props.postId)}}>
-         { !isLike ? <FavoriteBorderIcon /> :<FavoriteIcon  color="secondary"/> }
+        <IconButton aria-label="add to favorites" onClick={handleLikeClick}>
+         { !liked ? <FavoriteBorderIcon /> :<FavoriteIcon  color="secondary"/> }
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
@@ -99,7 +96,8 @@ const Post = (props) => {
 const mapStateToProps = state => {
   return {
     username: state.auth.username,
-    token: state.auth.token
+    token: state.auth.token,
+    temp: state.data.temp
   }
 }
 
