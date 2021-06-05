@@ -10,7 +10,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ShareIcon from '@material-ui/icons/Share';
 import moment from 'moment';
-import {Link, useRouteMatch} from 'react-router-dom';
+import {Link, useLocation, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import * as actions from '../../../store/actions/index';
@@ -64,6 +64,20 @@ const Post = (props) => {
   const handleLikeClick = () => {
     props.likeUnlikePost(props.token, props.postId);
   }
+  const location = useLocation();
+  const handleShareClick = async () => {
+    
+    if(navigator.share){
+      navigator.share({
+        url: `${window.location.href}posts/${props.postId}` ,
+        title: props.title
+      }).then(() => {
+        console.log('Data share successfully')})
+      .catch(err => {
+        console.log("Unable to share data");
+      })
+    }
+  }
 
   useEffect(() => {
     if(props.temp && props.temp.id === props.postId){
@@ -88,7 +102,7 @@ const Post = (props) => {
         <IconButton aria-label="add to favorites" onClick={handleLikeClick}>
          { !liked ? <FavoriteBorderIcon /> :<FavoriteIcon  color="secondary"/> }
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton aria-label="share" onClick={handleShareClick}>
           <ShareIcon />
         </IconButton>
         
