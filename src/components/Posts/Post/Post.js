@@ -17,11 +17,16 @@ import * as actions from '../../../store/actions/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: 310,
     marginRight: 25,
     marginBottom: 25,
     boxShadow: '1px 1px 0.5em',
 
+  },
+  cardHeader:{
+    width: '100%',
+    whiteSpace: 'nowrap',
+    
   },
   media: {
     height: 0,
@@ -70,6 +75,7 @@ const Post = (props) => {
     <div>
     <Card className={classes.root}>
       <CardHeader
+        className={classes.cardHeader}
         title={props.title}
         subheader={moment(props.createdAt).fromNow()}
       />

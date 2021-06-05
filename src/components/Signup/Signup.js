@@ -118,7 +118,7 @@ class Signup extends Component{
 
 
         let form = (
-            <form>
+            <form className="signup-form">
                 {formElementArr.map(element => {
                    return(
                     <div key={element.id}>

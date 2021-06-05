@@ -8,6 +8,7 @@
     text-align: justify;
     font-size: 17px;
     font-family: emoji !important;
+    white-space: pre-line;
 
 }
 .post-content-section-inner-left{

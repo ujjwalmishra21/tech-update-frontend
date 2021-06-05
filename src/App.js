@@ -6,8 +6,10 @@ import './App.css';
 
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
 import NavBar from '../src/elements/NavBar/NavBar';
+import Footer from './elements/Footer/Footer';
 
 import * as actions from './store/actions/index';
+
 
 
 const asyncPosts = asyncComponent(() => {
@@ -67,6 +69,7 @@ class App extends Component {
         <header className="App-header">
           {route}
         </header>
+        <Footer/>
       </div>
     );
   }

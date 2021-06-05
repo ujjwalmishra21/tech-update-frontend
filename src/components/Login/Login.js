@@ -86,7 +86,7 @@ class Login extends Component{
         }
       
         let form = (
-            <form>
+            <form className="login-form">
                 {formElementArr.map(element => {
                    return(
                     <div  key={element.id}>
